@@ -8,6 +8,10 @@ export default function Home() {
   // Servira plus tard
   const [videoGames, setVideoGames] = useState<VideoGame[]>([]);
 
+  const[loveList, setLoveList] = useState<string[]>(["manger de fruits", "faire caca à la fin de la journée", "être pris dans le trafic"]);
+  const[age, setAge] = useState<number>(19);
+  var [conteur,setConteur]= useState<number>(0);
+
   return (
     <div className="w-5xl m-auto mt-2">
 
@@ -20,18 +24,24 @@ export default function Home() {
 
         {/* Exercice 2 : liste */}
         <div className="bg-gray-100 rounded-lg p-2 flex-1">
-
+          <p>J'aime :</p>
+          <ul className="list-disc ml-4">
+            {loveList.map((i) => (
+              <li key={i}>{i}</li>
+            ))}
+          </ul>
+        <p>plus que la prog</p>
         </div>
 
         {/* Exercice 3 : condition */}
         <div className="bg-gray-100 rounded-lg p-2 flex-1 flex items-center">
-          <div>J'aime les <span>???</span>.</div>
+          <div>J'aime les <span>{age < 18 ? "LEGO" : "cigarettes🚬"}</span>.</div>
         </div>
 
         {/* Exercice 4 : événement */}
         <div className="bg-gray-100 rounded-lg p-2 flex-1">
-          <button className="border-gray-500 border-1 px-2 rounded-sm bg-gray-200 my-2 cursor-pointer active:bg-gray-300">Chatouiller la bombe</button>
-          <p>Clics restants : 10 💣</p>
+          <button className="border-gray-500 border-1 px-2 rounded-sm bg-gray-200 my-2 cursor-pointer active:bg-gray-300" onClick={() => {setConteur(conteur + 1)}}>Chatouiller la bombe</button>
+          <p>Clics restants : {10 - conteur} {conteur < 10 ? "💣" : "💥"}</p>
         </div>
       </div>
 
