@@ -1,0 +1,16 @@
+USERS STORIES POUR TP1
+
+ En tant qu'utilisateur, je souhaite me connecter au MatchHub du serveur afin de pouvoir rejoindre une partie.
+
+ 	tâches:
+	- Créer la connexion au hub en sauvegardant le token d'identification 
+
+En tant qu'utilisateur, je souhaite pouvoir piger une carte et obtenir du mana au début de chaque ronde afin de pouvoir jouer les cartes que j'ai.
+
+	tâches:
+	-ajouter un StartTurnEvent du coté serveur qui envoi au client des DrawCardEvents 	 qui sont des cartes aléatoire de leur deck et un GainManaEvent qui donne une 		 quantité x de mana au joueur.
+
+En tant qu'utilisateur, je souhaite que le tour passe à mon adversaire après le mien afin de pouvoir continuer la partie.
+	
+
+En tant qu'utilisateur, je souhaite pouvoir quitter une partie en cours afin de pouvoir arrêter de jouer quand je le souhaite.
