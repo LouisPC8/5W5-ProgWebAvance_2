@@ -9,6 +9,7 @@ namespace Dessins.Events
     public abstract class DrawingEvent
     {
         public abstract string Type { get; }
+        public List<DrawingEvent>? Events { get; set; }
 
         public List<DrawingEvent>? DrawingEvents { get; set; } = null;
     }

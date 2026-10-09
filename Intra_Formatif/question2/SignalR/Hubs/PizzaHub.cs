@@ -13,6 +13,8 @@ namespace SignalR.Hubs
 
         public override async Task OnConnectedAsync()
         {
+            _pizzaManager.AddUser();
+            await Clients.All.SendAsync("NouvelleConnexion",_pizzaManager.NbConnectedUsers);
             await base.OnConnectedAsync();
         }
 
@@ -23,6 +25,13 @@ namespace SignalR.Hubs
 
         public async Task SelectChoice(PizzaChoice choice)
         {
+
+            List<int> data = [
+                _pizzaManager.GetPizzaPrice(choice),
+                _pizzaManager.GetMoney(choice),
+                _pizzaManager.GetNbPizzas(choice)
+                ];
+            await Clients.Caller.SendAsync("TaPizz", data);
         }
 
         public async Task UnselectChoice(PizzaChoice choice)
