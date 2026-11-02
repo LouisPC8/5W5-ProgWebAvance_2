@@ -17,11 +17,14 @@ var _s = __turbopack_context__.k.signature();
  * ======================================================================== */ // ---------------------------------------------------------------------------
 // méthode utilitaire vue dans le cours
 // ---------------------------------------------------------------------------
-const animer = async (elementId, keyframes, durationMS, garderLesValeursFinales = false)=>{
+var animating = false;
+var animatingInfinite = false;
+const animer = async (elementId, keyframes, durationMS, garderLesValeursFinales = false, boucler = false)=>{
     const element = document.getElementById(elementId);
     const animation = element?.animate(keyframes, {
         duration: durationMS,
-        fill: garderLesValeursFinales ? "forwards" : "none"
+        fill: garderLesValeursFinales ? "forwards" : "none",
+        iterations: boucler ? Infinity : 1
     });
     await animation?.finished;
 };
@@ -181,6 +184,59 @@ const FADE_IN = [
         opacity: 1
     }
 ];
+// TODO: FADE_OUT : devient transparent
+const FADE_OUT = [
+    {
+        opacity: 0
+    }
+];
+// TODO: PULSE : le slime grossit puis revient à sa taille normale (3 valeurs)
+const PULSE = [
+    {
+        transform: "scale(1)"
+    },
+    {
+        transform: "scale(2)"
+    },
+    {
+        transform: "scale(1)"
+    }
+];
+// TODO: ROTATE_CENTER : une rotation complète autour du centre
+const ROTATE_CENTER = [
+    {
+        transform: "rotate(0deg)"
+    },
+    {
+        transform: "rotate(360deg)"
+    }
+];
+// TODO: ROTATE_HOR : une rotation complète sur l'axe horizontal
+const ROTATE_HOR = [
+    {
+        transform: "rotateX(0deg)"
+    },
+    {
+        transform: "rotateX(360deg)"
+    }
+];
+const ROTATE_INFINI = [
+    {
+        transform: "rotate(0deg)"
+    },
+    {
+        transform: "rotate(360deg)"
+    },
+    {
+        transform: "rotate(720deg)"
+    },
+    {
+        transform: "rotateX(720deg)"
+    },
+    {
+        transform: "rotateX(1080deg)"
+    }
+];
 function Home() {
     _s();
     // détermine quels boutons sont affichés
@@ -189,27 +245,42 @@ function Home() {
         setSlimeIsPresent(true);
         // TODO: spawn
         // On garde les valeurs finales (opacity: 1), sinon Slimey redevient invisible
-        animer("slimeyId", FADE_IN, SPAWN_DURATION_MS);
+        animer("slimeyId", FADE_IN, SPAWN_DURATION_MS, true);
     };
     const death = ()=>{
         setSlimeIsPresent(false);
-    // TODO: death
-    // Les deux animations jouent en même temps (pas de await entre les deux)
+        // TODO: death
+        // Les deux animations jouent en même temps (pas de await entre les deux)
+        animer("slimeyId", FADE_OUT, DEATH_DURATION_MS, true);
     };
     const attack = async ()=>{
-    // TODO: attack
-    // await : on attend la fin de l'élan avant de jouer l'attaque
+        // TODO: attack
+        // await : on attend la fin de l'élan avant de jouer l'attaque
+        if (animating) return;
+        animating = true;
+        await animer("slimeyId", PULSE, ATTACK_DURATION_MS);
+        animating = false;
     };
     const bounceShakeFlip = async ()=>{
-    // TODO: bounceShakeFlip
+        // TODO: bounceShakeFlip
+        await animer("slimeyId", BOUNCE, BOUNCE_DURATION_MS);
+        await animer("slimeyId", SHAKE_X, SHAKE_DURATION_MS);
+        await animer("slimeyId", FLIP, FLIP_DURATION_MS);
     };
     const infiniteTripleSpin = async ()=>{
-    // TODO: infiniteTripleSpin
+        animatingInfinite = animatingInfinite ? false : true;
+        // TODO: infiniteTripleSpin
+        while(animatingInfinite){
+            await animer("slimeyId", ROTATE_CENTER, ROTATE_DURATION_MS);
+            await animer("slimeyId", ROTATE_CENTER, ROTATE_DURATION_MS);
+            await animer("slimeyId", ROTATE_HOR, ROTATE_DURATION_MS);
+        }
     // Boucle infinie : 2 rotations au centre, puis 1 rotation horizontale
     // On n'utilisera pas l'option de boucler l'animation, car on veut 2 rotations au centre puis 1 rotation horizontale, et non pas 3 rotations au centre
     // TODO: Optionnel: Un petit défi, vous pourriez faire une seule animation qui combine les 3 rotations et utilisé l'option de boucle
     };
     const infiniteTripleSpinBonus = async ()=>{
+        animer("slimeyId", ROTATE_INFINI, 10000, true, true);
     // TODO: infiniteTripleSpinBonus
     // TODO: Optionnel: Un petit défi, vous pourriez faire une seule animation qui combine les 3 rotations et utilisé l'option de boucle
     };
@@ -243,7 +314,7 @@ function Home() {
                         alt: "Fond"
                     }, void 0, false, {
                         fileName: "[project]/aniamtion/app/page.tsx",
-                        lineNumber: 170,
+                        lineNumber: 207,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -264,18 +335,18 @@ function Home() {
                             }
                         }, void 0, false, {
                             fileName: "[project]/aniamtion/app/page.tsx",
-                            lineNumber: 185,
+                            lineNumber: 222,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/aniamtion/app/page.tsx",
-                        lineNumber: 176,
+                        lineNumber: 213,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/aniamtion/app/page.tsx",
-                lineNumber: 169,
+                lineNumber: 206,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -289,7 +360,7 @@ function Home() {
                         children: "Spawn"
                     }, void 0, false, {
                         fileName: "[project]/aniamtion/app/page.tsx",
-                        lineNumber: 197,
+                        lineNumber: 234,
                         columnNumber: 11
                     }, this),
                     slimeIsPresent && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -300,7 +371,7 @@ function Home() {
                                 children: "Death"
                             }, void 0, false, {
                                 fileName: "[project]/aniamtion/app/page.tsx",
-                                lineNumber: 203,
+                                lineNumber: 240,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -309,7 +380,7 @@ function Home() {
                                 children: "Attack"
                             }, void 0, false, {
                                 fileName: "[project]/aniamtion/app/page.tsx",
-                                lineNumber: 206,
+                                lineNumber: 243,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -318,7 +389,7 @@ function Home() {
                                 children: "Bounce/Shake/Flip"
                             }, void 0, false, {
                                 fileName: "[project]/aniamtion/app/page.tsx",
-                                lineNumber: 209,
+                                lineNumber: 246,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -327,7 +398,7 @@ function Home() {
                                 children: "Infinite Triple Spin"
                             }, void 0, false, {
                                 fileName: "[project]/aniamtion/app/page.tsx",
-                                lineNumber: 212,
+                                lineNumber: 249,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$aniamtion$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -336,25 +407,25 @@ function Home() {
                                 children: "Infinite Triple Spin Bonus"
                             }, void 0, false, {
                                 fileName: "[project]/aniamtion/app/page.tsx",
-                                lineNumber: 215,
+                                lineNumber: 252,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/aniamtion/app/page.tsx",
-                        lineNumber: 202,
+                        lineNumber: 239,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/aniamtion/app/page.tsx",
-                lineNumber: 195,
+                lineNumber: 232,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/aniamtion/app/page.tsx",
-        lineNumber: 168,
+        lineNumber: 205,
         columnNumber: 5
     }, this);
 }
