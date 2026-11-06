@@ -1,0 +1,794 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+:root {
+  color-scheme: light;
+  --ink: #202a35;
+  --muted: #78838b;
+  --line: #e8e5de;
+  --paper: #fbfaf7;
+  --coral: #e9755e;
+  --blue: #73a8ba;
+  --green: #83a887;
+  --violet: #9c8ac2;
+  --gold: #d3a447;
+}
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button,
+a,
+select,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid #6d9fac;
+  outline-offset: 3px;
+}
+
+main {
+  overflow: hidden;
+}
+
+.exercises-section {
+  margin: 0 auto;
+  max-width: 1190px;
+  padding: 87px 48px 80px;
+}
+
+.section-heading {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 34px;
+}
+
+.section-heading h2,
+.closing-note h2 {
+  color: #28363d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(31px, 4vw, 43px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  margin: 9px 0 0;
+}
+
+.section-heading > p {
+  color: #798287;
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 0 0 4px;
+  max-width: 315px;
+}
+
+.exercise-list {
+  display: grid;
+  gap: 16px;
+}
+
+.exercise-panel {
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #eeece6;
+  border-radius: 9px;
+  display: grid;
+  gap: 29px;
+  grid-template-columns: minmax(210px, 0.77fr) minmax(0, 1.8fr);
+  padding: 27px;
+}
+
+.exercise-panel-last {
+  padding-bottom: 24px;
+}
+
+.exercise-copy {
+  align-self: center;
+  padding: 2px 0;
+}
+
+.exercise-number {
+  align-items: center;
+  color: #8a928e;
+  display: flex;
+  font-size: 8px;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: 0.15em;
+}
+
+.exercise-number > span {
+  color: #5d7b68;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.exercise-number i {
+  background: #d7ddd4;
+  height: 1px;
+  width: 17px;
+}
+
+.exercise-copy h3 {
+  color: #2a3840;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin: 14px 0 9px;
+}
+
+.exercise-copy > p:not(.learning-note, .power-feedback) {
+  color: #768087;
+  font-size: 11px;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 260px;
+}
+
+.learning-note {
+  border-left: 2px solid #dfe7dc;
+  color: #89918e;
+  font-size: 9px;
+  line-height: 1.65;
+  margin: 14px 0 19px;
+  max-width: 260px;
+  padding-left: 9px;
+}
+
+.learning-note span {
+  color: #546b5b;
+  display: block;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.button-primary,
+.button-outline {
+  align-items: center;
+  display: inline-flex;
+  gap: 9px;
+  justify-content: center;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, opacity 160ms ease;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  min-height: 35px;
+  padding: 0 12px;
+}
+
+.button-primary {
+  background: #31484a;
+  border: 1px solid #31484a;
+  color: white;
+}
+
+.button-primary:not(:disabled):hover {
+  background: #415b5e;
+}
+
+.button-primary:disabled {
+  cursor: default;
+  opacity: 0.53;
+}
+
+.button-outline {
+  background: #fff;
+  border: 1px solid #dcded8;
+  color: #52635b;
+}
+
+.button-outline:hover {
+  background: #f2f4ef;
+}
+
+.button-quiet {
+  background: transparent;
+  border: 0;
+  color: #7e8984;
+  margin-left: 3px;
+  padding: 0 7px;
+}
+
+.button-quiet:hover {
+  color: #344a40;
+}
+
+.button-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.demo-stage {
+  align-self: center;
+  background-color: #f8f7f3;
+  background-size: 14px 14px;
+  border: 1px solid #ecebe4;
+  border-radius: 6px;
+  min-width: 0;
+  padding: 16px 17px 12px;
+}
+
+.stage-label {
+  align-items: center;
+  color: #969d98;
+  display: flex;
+  font-size: 7px;
+  font-weight: 700;
+  justify-content: space-between;
+  letter-spacing: 0.13em;
+  margin-bottom: 13px;
+}
+
+.stage-label > span:last-child {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+}
+
+.card-row {
+  align-items: stretch;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.playing-card {
+  border-radius: 6px;
+  box-shadow: 0 3px 8px #2b35300a;
+  color: #38454a;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 148px;
+  min-height: 155px;
+  min-width: 0;
+  padding: 9px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: box-shadow 220ms ease, border-color 220ms ease, opacity 220ms ease;
+}
+
+/* Les deux côtés de la carte sont superposés. Le côté caché n'est pas visible (backface-visibility). */
+.card-face {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border: 1px solid #e4e3dc;
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: inherit;
+  position: absolute;
+}
+
+.card-front {
+  background: #fff;
+}
+
+.card-back-face {
+  background: #819e88;
+  border-color: #6d8a74;
+  transform: rotateY(180deg);
+}
+
+.card-back-face::before {
+  border: 1px solid #ffffff50;
+  border-radius: 4px;
+  content: "";
+  inset: 8px;
+  position: absolute;
+}
+
+/* Une carte face cachée montre son dos. */
+.face-down {
+  transform: rotateY(180deg);
+}
+
+.card-heading {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  min-height: 26px;
+}
+
+.card-id {
+  color: #9a9e99;
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin-bottom: 3px;
+}
+
+.card-heading h3 {
+  color: #334047;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  max-width: 86px;
+}
+
+.mana-gem {
+  align-items: center;
+  background: #d9e8ea;
+  border: 1px solid #c1d9db;
+  border-radius: 50%;
+  color: #486f79;
+  display: inline-flex;
+  flex: 0 0 20px;
+  font-size: 9px;
+  font-weight: 700;
+  height: 20px;
+  justify-content: center;
+  width: 20px;
+}
+
+.card-art {
+  align-items: center;
+  background: linear-gradient(145deg, #f6e5df, #f4ede2);
+  border: 1px solid #ffffffa6;
+  border-radius: 4px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  margin: 7px 0;
+  min-height: 56px;
+  overflow: hidden;
+  position: relative;
+}
+
+[data-theme="blue"] .card-art {
+  background: linear-gradient(145deg, #dcebef, #eef2ed);
+}
+
+[data-theme="green"] .card-art {
+  background: linear-gradient(145deg, #e1ebdf, #f0efe2);
+}
+
+[data-theme="violet"] .card-art {
+  background: linear-gradient(145deg, #e7e1ef, #f0e9e3);
+}
+
+[data-theme="gold"] .card-art {
+  background: linear-gradient(145deg, #f1e7cd, #f3eee1);
+}
+
+[data-theme="sand"] .card-art {
+  background: linear-gradient(145deg, #e9e1d1, #f4ede2);
+}
+
+.art-orbit {
+  border: 1px solid #dc9a7c77;
+  border-radius: 50%;
+  height: 49px;
+  position: absolute;
+  transform: rotate(33deg) scaleY(0.52);
+  width: 49px;
+}
+
+.art-orbit-two {
+  height: 33px;
+  transform: rotate(-31deg) scaleY(0.54);
+  width: 67px;
+}
+
+[data-theme="blue"] .art-orbit {
+  border-color: #71aeb6a6;
+}
+
+[data-theme="green"] .art-orbit {
+  border-color: #87a681a6;
+}
+
+[data-theme="violet"] .art-orbit {
+  border-color: #a18ac3a6;
+}
+
+[data-theme="gold"] .art-orbit {
+  border-color: #c9a252a6;
+}
+
+[data-theme="sand"] .art-orbit {
+  border-color: #a99373a6;
+}
+
+.art-core {
+  background: #d97c5d;
+  border: 3px solid #ffffffad;
+  border-radius: 50%;
+  box-shadow: 0 0 18px #dd9b62a6;
+  height: 18px;
+  position: relative;
+  width: 18px;
+}
+
+[data-theme="blue"] .art-core {
+  background: #6aabb4;
+  box-shadow: 0 0 18px #69acb399;
+}
+
+[data-theme="green"] .art-core {
+  background: #81a47a;
+  box-shadow: 0 0 18px #81a47a99;
+}
+
+[data-theme="violet"] .art-core {
+  background: #9b84bf;
+  box-shadow: 0 0 18px #9b84bf99;
+}
+
+[data-theme="gold"] .art-core {
+  background: #cda34a;
+  box-shadow: 0 0 18px #cda34a99;
+}
+
+[data-theme="sand"] .art-core {
+  background: #a99373;
+  box-shadow: 0 0 18px #a9937399;
+}
+
+.card-footer {
+  align-items: center;
+  color: #818a8c;
+  display: flex;
+  font-size: 6px;
+  justify-content: space-between;
+  line-height: 1.3;
+  min-height: 17px;
+  gap: 3px;
+}
+
+.power-list {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+}
+
+.power-token {
+  align-items: center;
+  background: #e9755e;
+  border: 1px solid #ffffffb3;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px #202a3522;
+  color: white;
+  display: inline-flex;
+  flex: 0 0 30px;
+  font-size: 12px;
+  font-weight: 700;
+  height: 30px;
+  justify-content: center;
+  position: relative;
+  width: 30px;
+  z-index: 1;
+}
+
+.power-token[data-power-id="p2"] {
+  background: #6d9fb0;
+}
+
+.power-token[data-power-id="p3"] {
+  background: #d0a444;
+}
+
+.selected-card {
+  border-color: #8da78f;
+  box-shadow: 0 0 0 2px #8da78f38, 0 5px 14px #2b35300c;
+}
+
+.battle-stage {
+  padding-bottom: 10px;
+}
+
+.battle-line {
+  align-items: center;
+  color: #939b96;
+  display: flex;
+  font-size: 7px;
+  gap: 10px;
+  justify-content: center;
+  letter-spacing: 0.13em;
+  margin: 0 auto 6px;
+}
+
+.battle-line svg {
+  color: #a3afa3;
+}
+
+.battle-cards {
+  align-items: center;
+  min-height: 157px;
+  padding: 0 64px;
+}
+
+.battle-cards .playing-card {
+  flex: 0 1 144px;
+}
+
+.mana-control {
+  margin-top: 18px;
+  max-width: 218px;
+}
+
+.control-label {
+  color: #8c9590;
+  display: block;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  margin-bottom: 7px;
+}
+
+.mana-stepper {
+  align-items: center;
+  border: 1px solid #e6e7e1;
+  border-radius: 5px;
+  display: flex;
+  height: 39px;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.stepper-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+  color: #65746b;
+  cursor: pointer;
+  display: inline-flex;
+  height: 27px;
+  justify-content: center;
+  width: 28px;
+}
+
+.stepper-button:hover:not(:disabled) {
+  background: #edf1eb;
+}
+
+.stepper-button:disabled {
+  color: #c5c9c4;
+  cursor: default;
+}
+
+.mana-total {
+  align-items: center;
+  color: #546e68;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 6px;
+}
+
+.mana-total svg {
+  color: #c39c46;
+  fill: #f1dfad;
+}
+
+.mana-total small {
+  color: #9ca39e;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.mana-slider {
+  accent-color: #6f9877;
+  cursor: pointer;
+  display: block;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.mana-stage .card-row {
+  min-height: 165px;
+}
+
+.mana-stage .playing-card {
+  min-height: 161px;
+}
+
+.power-controls {
+  display: grid;
+  gap: 9px;
+  margin: 13px 0 15px;
+  max-width: 242px;
+}
+
+.power-controls label {
+  display: block;
+}
+
+.power-controls select {
+  appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237c8982' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+  border: 1px solid #e4e5df;
+  border-radius: 4px;
+  color: #55625d;
+  cursor: pointer;
+  font-size: 9px;
+  height: 32px;
+  padding: 0 28px 0 9px;
+  width: 100%;
+}
+
+.power-stage {
+  padding-bottom: 12px;
+}
+
+.power-cards {
+  min-height: 194px;
+}
+
+.power-cards .playing-card {
+  min-height: 188px;
+}
+
+/* Exercice de la pige : cartes de largeur fixe (120px + 10px d'espace = 130px de décalage). */
+.draw-stage {
+  min-height: 420px;
+  perspective: 800px;
+}
+
+.draw-stage .card-row {
+  justify-content: flex-start;
+  min-height: 155px;
+}
+
+.draw-stage .playing-card {
+  flex: none;
+  width: 120px;
+}
+
+/* Le paquet est sous la 1re place (à gauche), là où la carte pigée arrive. */
+.draw-deck {
+  justify-content: flex-start;
+  margin-top: 35px;
+}
+
+@media (min-width: 1440px) {
+  .hero {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 850px) {
+  .exercises-section {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .exercise-panel {
+    gap: 19px;
+    grid-template-columns: minmax(185px, 0.75fr) minmax(0, 1.65fr);
+    padding: 19px;
+  }
+
+  .demo-stage {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .card-row {
+    gap: 6px;
+  }
+
+  .playing-card {
+    padding: 7px;
+  }
+}
+
+@media (max-width: 650px) {
+  .exercises-section {
+    padding: 57px 15px 48px;
+  }
+
+  .exercise-list {
+    gap: 11px;
+  }
+
+  .exercise-panel {
+    gap: 18px;
+    grid-template-columns: 1fr;
+    padding: 19px 16px 16px;
+  }
+
+  .exercise-copy h3 {
+    font-size: 24px;
+  }
+
+  .exercise-copy > p {
+    max-width: 380px;
+  }
+
+  .demo-stage {
+    padding: 14px 10px 11px;
+  }
+
+  .card-row {
+    gap: 7px;
+  }
+
+  .playing-card {
+    min-height: 150px;
+    padding: 8px;
+  }
+
+  .mana-stage .playing-card {
+    min-height: 155px;
+  }
+
+  .power-cards .playing-card {
+    min-height: 174px;
+  }
+
+  .power-cards {
+    min-height: 180px;
+  }
+
+  .power-controls {
+    max-width: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .playing-card {
+    min-height: 138px;
+    padding: 6px;
+  }
+
+  .card-footer {
+    font-size: 5px;
+  }
+
+  .power-token {
+    flex-basis: 18px;
+    height: 18px;
+    width: 18px;
+  }
+}
+
